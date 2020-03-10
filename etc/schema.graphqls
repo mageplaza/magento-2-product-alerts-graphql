@@ -17,23 +17,55 @@
 # @license     https://www.mageplaza.com/LICENSE.txt
 
 type Customer {
-    mp_product_alert:MpProductAlertsCustomers @doc(description: "Product alerts customer")
+    mp_product_alert: MpProductAlertsCustomersOutput @doc(description: "Product alerts customer") @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Account")
 }
 
-type MpProductAlertsCustomers {
-    out_of_stock(
+type Mutation {
+    MpProductAlertSubsriberDelete(
+        input: CustomerDeleteInput @doc(description: "Information of the subscriber is delete.")
+    ): MpProductAlertSubsriberDeleteOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Delete")
+    MpProductAlertCustomerNotifyPriceDrops(
+        input: CustomerSubmitInput @doc(description: "Information of the subscriber is submit.")
+    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Price")
+    MpProductAlertCustomerNotifyInStock(
+        input: CustomerSubmitInput @doc(description: "Information of the subscriber is submit.")
+    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Stock")
+    MpProductAlertNotifyPriceDrops(
+        input: GuestSubmitInput @doc(description: "Information of the subscriber is submit.")
+    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Price")
+    MpProductAlertNotifyInStock(
+        input: GuestSubmitInput @doc(description: "Information of the subscriber is submit.")
+    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Stock")
+}
+
+type MpProductAlertsCustomersOutput {
+    customerId: Int @doc(description: "Customer Id")
+    out_of_stock (
         filter: MpProductAlertsSubscriberFilterInput @doc(description: "Identifies which MpProductAlertsSubscriberFilterInput attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
         currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
-    ): MpProductAlertsSubscriber @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Subscriber") @doc(description: "The total number of results returned when a query is applied")
-#    product_price(
-#        filter: MpProductAlertsSubscriberFilterInput @doc(description: "Identifies which MpProductAlertsSubscriberFilterInput attributes to search for and return.")
-#        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
-#        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
-#    ): MpProductAlertsSubscriber @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Subscriber") @doc(description: "The total number of results returned when a query is applied")
+    ): MpProductAlertsSubscriber @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\GetSubscriber\\Stock") @doc(description: "The total number of results returned when a query is applied")
+    product_price (
+        filter: MpProductAlertsSubscriberFilterInput @doc(description: "Identifies which MpProductAlertsSubscriberFilterInput attributes to search for and return.")
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
+    ): MpProductAlertsSubscriber @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\GetSubscriber\\Price") @doc(description: "The total number of results returned when a query is applied")
 }
 
-input MpProductAlertsSubscriberFilterInput{
+input CustomerSubmitInput {
+    productSku: String! @doc(description: "The Sku assigned to the product.")
+}
+
+input CustomerDeleteInput {
+    id: Int! @doc(description: "The ID number assigned to the product.")
+}
+
+input GuestSubmitInput {
+    email: String! @doc(description: "The customer Email."),
+    productSku: String! @doc(description: "The Sku assigned to the product.")
+}
+
+input MpProductAlertsSubscriberFilterInput {
     subscriber_id: FilterTypeInput @doc(description: "Subscriber Id")
     customer_id: FilterTypeInput @doc(description: "Customer Id")
     customer_email: FilterTypeInput @doc(description: "Customer Email")
@@ -48,6 +80,10 @@ input MpProductAlertsSubscriberFilterInput{
     subscribe_updated_at: FilterTypeInput @doc(description: "Subscribe Updated At")
     subscribe_created_at: FilterTypeInput @doc(description: "Subscribe Created At")
     last_send_date: FilterTypeInput @doc(description: "Last Send Date")
+}
+
+type MpProductAlertSubsriberDeleteOutput {
+    status: Boolean
 }
 
 type MpProductAlertsSubscriber {

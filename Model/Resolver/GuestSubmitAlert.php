@@ -14,7 +14,7 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_FaqsGraphQl
+ * @package     Mageplaza_ProductAlertsGraphQl
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
@@ -25,6 +25,7 @@ namespace Mageplaza\ProductAlertsGraphQl\Model\Resolver;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
+use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\ProductAlerts\Api\ProductAlertsRepositoryInterface;
@@ -32,10 +33,10 @@ use Mageplaza\ProductAlerts\Model\Config\Source\Type;
 use Mageplaza\ProductAlertsGraphQl\Helper\Data;
 
 /**
- * Class Subscriber
+ * Class GuestSubmitAlert
  * @package Mageplaza\ProductAlertsGraphQl\Model\Resolver
  */
-class Subscriber implements ResolverInterface
+class GuestSubmitAlert implements ResolverInterface
 {
 
     /**
@@ -52,6 +53,7 @@ class Subscriber implements ResolverInterface
      * @var int
      */
     protected $subscriberType;
+
     /**
      * @var ProductAlertsRepositoryInterface
      */
@@ -67,7 +69,7 @@ class Subscriber implements ResolverInterface
         Data $helperData,
         ProductAlertsRepositoryInterface $productAlertsRepository
     ) {
-        $this->_helperData = $helperData;
+        $this->_helperData             = $helperData;
         $this->productAlertsRepository = $productAlertsRepository;
     }
 
@@ -76,25 +78,23 @@ class Subscriber implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-        if (!isset($value['model'])) {
-            throw new LocalizedException(__('"model" value should be specified'));
+        if (empty($args['input']['email'])) {
+            throw new GraphQlInputException(__('"email" is not empty.'));
+        }
+        if (empty($args['input']['productSku'])) {
+            throw new GraphQlInputException(__('"productSku" is not empty.'));
         }
 
-        $customer = $value['model'];
-
-        $searchCriteria = $this->_helperData->validateAndAddFilter($args, 'subscribers');
         if ($this->_type === Type::STOCK_SUBSCRIPTION) {
-            $searchResult = $this->productAlertsRepository->getOutOfStockAlert($customer->getId(), $searchCriteria);
-        } else {
-            $searchResult = $this->productAlertsRepository->getPriceAlert($customer->getId(), $searchCriteria);
+            return $this->productAlertsRepository->guestSubscriberStock(
+                $args['input']['email'],
+                $args['input']['productSku']
+            );
         }
-        $items = $searchResult->getItems();
-        $pageInfo = $this->_helperData->getPageInfo($items, $searchCriteria, $args);
 
-        return [
-            'total_count' => $searchResult->getTotalCount(),
-            'items'       => $items,
-            'pageInfo'    => $pageInfo
-        ];
+        return $this->productAlertsRepository->guestSubscriberPrice(
+            $args['input']['email'],
+            $args['input']['productSku']
+        );
     }
 }
