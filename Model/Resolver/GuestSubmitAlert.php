@@ -23,7 +23,6 @@ declare(strict_types=1);
 
 namespace Mageplaza\ProductAlertsGraphQl\Model\Resolver;
 
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;

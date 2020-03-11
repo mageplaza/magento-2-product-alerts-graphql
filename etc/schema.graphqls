@@ -17,25 +17,25 @@
 # @license     https://www.mageplaza.com/LICENSE.txt
 
 type Customer {
-    mp_product_alert: MpProductAlertsCustomersOutput @doc(description: "Product alerts customer") @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Account")
+    mp_product_alert: MpProductAlertsCustomersOutput @doc(description: "Customer Mageplaza product alerts") @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Account")
 }
 
 type Mutation {
     MpProductAlertSubsriberDelete(
         input: CustomerDeleteInput @doc(description: "Information of the subscriber is delete.")
-    ): MpProductAlertSubsriberDeleteOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Delete")
+    ): MpProductAlertSubsriberDeleteOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Delete") @doc(description: "Customer remove subscriber.")
     MpProductAlertCustomerNotifyPriceDrops(
-        input: CustomerSubmitInput @doc(description: "Information of the subscriber is submit.")
-    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Price")
+        input: CustomerSubmitInput @doc(description: "Information of the customer is submit.")
+    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Price") @doc(description: "Customer add new Price alert.")
     MpProductAlertCustomerNotifyInStock(
-        input: CustomerSubmitInput @doc(description: "Information of the subscriber is submit.")
-    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Stock")
+        input: CustomerSubmitInput @doc(description: "Information of the customer is submit.")
+    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Stock") @doc(description: "Customer add new Stock alert.")
     MpProductAlertNotifyPriceDrops(
         input: GuestSubmitInput @doc(description: "Information of the subscriber is submit.")
-    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Price")
+    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Price") @doc(description: "Guest add new Price alert.")
     MpProductAlertNotifyInStock(
         input: GuestSubmitInput @doc(description: "Information of the subscriber is submit.")
-    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Stock")
+    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Stock") @doc(description: "Guest add new Stock alert.")
 }
 
 type MpProductAlertsCustomersOutput {
@@ -83,12 +83,12 @@ input MpProductAlertsSubscriberFilterInput {
 }
 
 type MpProductAlertSubsriberDeleteOutput {
-    status: Boolean
+    status: Boolean @doc(description: "Status after delete subscriber.")
 }
 
 type MpProductAlertsSubscriber {
     total_count: Int @doc(description: "The total number of results returned when a query is applied"),
-    items: [MpMageplazaSubscriberOutput] @doc(description: "MpMageplazaFaqsCategory data is satisfied"),
+    items: [MpMageplazaSubscriberOutput] @doc(description: "mp_product_alert data is satisfied"),
     pageInfo: PageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query")
 }
 
