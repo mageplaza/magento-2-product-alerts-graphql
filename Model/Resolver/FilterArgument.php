@@ -61,14 +61,12 @@ class FilterArgument implements FieldEntityAttributesInterface
      */
     public function getEntityAttributes(): array
     {
-        $entities = ['MpMageplazaSubscriberOutput'];
         $fields   = [];
-        foreach ($entities as $entity) {
-            /** @var Field $field */
-            foreach ($this->config->getConfigElement($entity)->getFields() as $field) {
-                $fieldName = $field->getName();
-                $fields[$fieldName] = ['type' => 'String', 'fieldName' => $fieldName];
-            }
+
+        /** @var Field $field */
+        foreach ($this->config->getConfigElement('MpMageplazaSubscriberOutput')->getFields() as $field) {
+            $fieldName = $field->getName();
+            $fields[$fieldName] = ['fieldName' => $fieldName];
         }
         if ($this->_helperData->versionCompare('2.3.4')) {
             return $fields;

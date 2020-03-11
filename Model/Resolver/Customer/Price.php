@@ -45,10 +45,6 @@ class Price extends Customer implements ResolverInterface
         }
         $customer = $this->checkCustomer($context);
 
-        if (empty($args['input']['productSku'])) {
-            throw new GraphQlInputException(__('productSku is not empty.'));
-        }
-
         return $this->productAlertsRepository->mineSubscriberPrice($customer->getId(), $args['input']['productSku']);
     }
 }

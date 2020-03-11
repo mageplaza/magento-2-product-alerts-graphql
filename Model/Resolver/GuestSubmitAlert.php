@@ -77,13 +77,6 @@ class GuestSubmitAlert implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-        if (empty($args['input']['email'])) {
-            throw new GraphQlInputException(__('"email" is not empty.'));
-        }
-        if (empty($args['input']['productSku'])) {
-            throw new GraphQlInputException(__('"productSku" is not empty.'));
-        }
-
         if ($this->_type === Type::STOCK_SUBSCRIPTION) {
             return $this->productAlertsRepository->guestSubscriberStock(
                 $args['input']['email'],

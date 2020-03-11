@@ -45,10 +45,6 @@ class Delete extends Customer implements ResolverInterface
         }
         $customer = $this->checkCustomer($context);
 
-        if (empty($args['input']['id'])) {
-            throw new GraphQlInputException(__('Id is not empty.'));
-        }
-
         return [
             'status' =>
                 $this->productAlertsRepository->mineDeleteSubscriber((int) $customer->getId(), $args['input']['id'])
