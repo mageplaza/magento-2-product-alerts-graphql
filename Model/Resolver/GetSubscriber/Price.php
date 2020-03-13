@@ -14,7 +14,7 @@
  * version in the future.
  *
  * @category    Mageplaza
- * @package     Mageplaza_FaqsGraphQl
+ * @package     Mageplaza_ProductAlertsGraphQl
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
