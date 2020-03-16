@@ -89,7 +89,7 @@ class Data extends CoreHelper
     {
         //possible division by 0
         if ($searchCriteria->getPageSize()) {
-            $maxPages = ceil(count($searchResult) / $searchCriteria->getPageSize());
+            $maxPages = ceil($searchResult->getTotalCount() / $searchCriteria->getPageSize());
         } else {
             $maxPages = 0;
         }
