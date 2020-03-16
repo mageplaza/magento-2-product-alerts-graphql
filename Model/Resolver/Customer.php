@@ -91,14 +91,9 @@ class Customer
      */
     public function checkCustomer($context)
     {
-        if ($this->_helperData->versionCompare('2.3.3')) {
-            if ($context->getExtensionAttributes()->getIsCustomer() === false) {
-                throw new GraphQlAuthorizationException(__('The current customer isn\'t authorized.'));
-            }
-
-            if (empty($args['input']) || !is_array($args['input'])) {
-                throw new GraphQlInputException(__('"input" value should be specified'));
-            }
+        if ($this->_helperData->versionCompare('2.3.3')
+            && $context->getExtensionAttributes()->getIsCustomer() === false) {
+            throw new GraphQlAuthorizationException(__('The current customer isn\'t authorized.'));
         }
 
         return $this->getCustomer->execute($context);
