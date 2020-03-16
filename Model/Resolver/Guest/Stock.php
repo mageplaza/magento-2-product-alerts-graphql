@@ -35,5 +35,5 @@ class Stock extends GuestSubmitAlert
     /**
      * @var int
      */
-    protected $_type = Type::PRICE_SUBSCRIPTION;
+    protected $_type = Type::STOCK_SUBSCRIPTION;
 }
