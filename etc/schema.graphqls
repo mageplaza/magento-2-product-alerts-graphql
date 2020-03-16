@@ -39,7 +39,6 @@ type Mutation {
 }
 
 type MpProductAlertsCustomersOutput {
-    customerId: Int @doc(description: "Customer Id")
     out_of_stock (
         filter: MpProductAlertsSubscriberFilterInput @doc(description: "Identifies which MpProductAlertsSubscriberFilterInput attributes to search for and return.")
         pageSize: Int = 5 @doc(description: "How many items should show on the page?")
