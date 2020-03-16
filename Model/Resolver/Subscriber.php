@@ -89,7 +89,7 @@ class Subscriber implements ResolverInterface
             $searchResult = $this->productAlertsRepository->getPriceAlert($customer->getId(), $searchCriteria);
         }
         $items = $searchResult->getItems();
-        $pageInfo = $this->_helperData->getPageInfo($items, $searchCriteria, $args);
+        $pageInfo = $this->_helperData->getPageInfo($searchResult, $searchCriteria, $args);
 
         return [
             'total_count' => $searchResult->getTotalCount(),
