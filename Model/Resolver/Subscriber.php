@@ -76,6 +76,10 @@ class Subscriber implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
+        if (!$this->_helperData->isEnabled()) {
+            return [];
+        }
+
         if (!isset($value['model'])) {
             throw new LocalizedException(__('"model" value should be specified'));
         }

@@ -29,6 +29,7 @@ use Magento\Framework\GraphQl\Exception\GraphQlAuthenticationException;
 use Magento\Framework\GraphQl\Exception\GraphQlAuthorizationException;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
+use Magento\Framework\GraphQl\Query\Resolver\ContextInterface;
 use Mageplaza\ProductAlerts\Api\ProductAlertsRepositoryInterface;
 use Mageplaza\ProductAlerts\Helper\Data;
 
@@ -71,7 +72,7 @@ class Customer
     }
 
     /**
-     * @param $context
+     * @param ContextInterface $context
      *
      * @return CustomerInterface
      * @throws GraphQlAuthorizationException

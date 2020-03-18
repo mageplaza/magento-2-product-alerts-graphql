@@ -25,7 +25,6 @@ namespace Mageplaza\ProductAlertsGraphQl\Model\Resolver;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\GraphQl\Config\Element\Field;
-use Magento\Framework\GraphQl\Exception\GraphQlAuthorizationException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\ProductAlerts\Helper\Data;
@@ -59,12 +58,13 @@ class Account implements ResolverInterface
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
         if (!$this->_helperData->isEnabled()) {
-            throw new GraphQlAuthorizationException(__('The status module is disabled.'));
+            return [];
         }
 
         if (!isset($value['model'])) {
             throw new LocalizedException(__('"model" value should be specified'));
         }
+
         return $value;
     }
 }

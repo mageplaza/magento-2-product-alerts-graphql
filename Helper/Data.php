@@ -60,8 +60,8 @@ class Data extends CoreHelper
     }
 
     /**
-     * @param $args
-     * @param $fieldName
+     * @param array $args
+     * @param string $fieldName
      *
      * @return SearchCriteriaInterface
      * @throws GraphQlInputException
@@ -79,7 +79,7 @@ class Data extends CoreHelper
     /**
      * @param SearchResultsInterface|array $searchResult
      * @param SearchCriteriaInterface $searchCriteria
-     * @param $args
+     * @param array $args
      *
      * @return array
      * @throws GraphQlInputException
@@ -94,7 +94,7 @@ class Data extends CoreHelper
         }
 
         $currentPage = $searchCriteria->getCurrentPage();
-        if ($searchCriteria->getCurrentPage() > $maxPages && count($searchResult) > 0) {
+        if ($searchCriteria->getCurrentPage() > $maxPages && $searchResult->getTotalCount() > 0) {
             throw new GraphQlInputException(
                 __(
                     'currentPage value %1 specified is greater than the %2 page(s) available.',
