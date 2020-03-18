@@ -21,9 +21,9 @@ type Customer {
 }
 
 type Mutation {
-    MpProductAlertSubsriberDelete(
+    MpProductAlertSubscriberDelete(
         input: CustomerDeleteInput @doc(description: "Information of the subscriber is delete.")
-    ): MpProductAlertSubsriberDeleteOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Delete") @doc(description: "Customer remove subscriber.")
+    ): Boolean @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Delete") @doc(description: "Customer remove subscriber.")
     MpProductAlertCustomerNotifyPriceDrops(
         input: CustomerSubmitInput @doc(description: "Information of the customer is submit.")
     ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Price") @doc(description: "Customer add new Price alert.")
@@ -79,10 +79,6 @@ input MpProductAlertsSubscriberFilterInput {
     subscribe_updated_at: FilterTypeInput @doc(description: "Subscribe Updated At")
     subscribe_created_at: FilterTypeInput @doc(description: "Subscribe Created At")
     last_send_date: FilterTypeInput @doc(description: "Last Send Date")
-}
-
-type MpProductAlertSubsriberDeleteOutput {
-    status: Boolean @doc(description: "Status after delete subscriber.")
 }
 
 type MpProductAlertsSubscriber {

@@ -44,16 +44,6 @@ class Customer
     protected $_helperData;
 
     /**
-     * @var int
-     */
-    protected $_type;
-
-    /**
-     * @var int
-     */
-    protected $subscriberType;
-
-    /**
      * @var ProductAlertsRepositoryInterface
      */
     protected $productAlertsRepository;

@@ -24,7 +24,6 @@ declare(strict_types=1);
 namespace Mageplaza\ProductAlertsGraphQl\Model\Resolver\Customer;
 
 use Magento\Framework\GraphQl\Config\Element\Field;
-use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\ProductAlertsGraphQl\Model\Resolver\Customer;
@@ -40,14 +39,8 @@ class Delete extends Customer implements ResolverInterface
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
-        if (!$this->_helperData->isEnabled()) {
-            return [];
-        }
         $customer = $this->checkCustomer($context);
 
-        return [
-            'status' =>
-                $this->productAlertsRepository->mineDeleteSubscriber((int) $customer->getId(), $args['input']['id'])
-        ];
+        return $this->productAlertsRepository->mineDeleteSubscriber((int) $customer->getId(), $args['input']['id']);
     }
 }

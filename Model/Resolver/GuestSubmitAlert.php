@@ -24,12 +24,10 @@ declare(strict_types=1);
 namespace Mageplaza\ProductAlertsGraphQl\Model\Resolver;
 
 use Magento\Framework\GraphQl\Config\Element\Field;
-use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Mageplaza\ProductAlerts\Api\ProductAlertsRepositoryInterface;
 use Mageplaza\ProductAlerts\Model\Config\Source\Type;
-use Mageplaza\ProductAlertsGraphQl\Helper\Data;
 
 /**
  * Class GuestSubmitAlert
@@ -39,19 +37,9 @@ class GuestSubmitAlert implements ResolverInterface
 {
 
     /**
-     * @var Data
-     */
-    protected $_helperData;
-
-    /**
      * @var int
      */
     protected $_type;
-
-    /**
-     * @var int
-     */
-    protected $subscriberType;
 
     /**
      * @var ProductAlertsRepositoryInterface
@@ -61,14 +49,11 @@ class GuestSubmitAlert implements ResolverInterface
     /**
      * Categories constructor.
      *
-     * @param Data $helperData
      * @param ProductAlertsRepositoryInterface $productAlertsRepository
      */
     public function __construct(
-        Data $helperData,
         ProductAlertsRepositoryInterface $productAlertsRepository
     ) {
-        $this->_helperData             = $helperData;
         $this->productAlertsRepository = $productAlertsRepository;
     }
 
