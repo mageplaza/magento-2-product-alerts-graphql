@@ -1,0 +1,5 @@
+"currentPage value %1 specified is greater than the %2 page(s) available.","currentPage value %1 specified is greater than the %2 page(s) available."
+"currentPage value must be greater than 0.","currentPage value must be greater than 0."
+"pageSize value must be greater than 0.","pageSize value must be greater than 0."
+"""model"" value should be specified","""model"" value should be specified"
+"The current customer isn't authorized.","The current customer isn't authorized."
