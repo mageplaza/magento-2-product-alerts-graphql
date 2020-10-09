@@ -20,4 +20,4 @@ To start working with **Product Alerts GraphQL** in Magento, you need to:
 - The queries Mageplaza supports can be viewed [here](https://documenter.getpostman.com/view/10589000/SzS4RT6V?version=latest).
 
 
-![a](https://i.imgur.com/o5ePWCM.png)
+![a](https://i.imgur.com/pcs5qdb.png)
