@@ -1,4 +1,4 @@
-# Product Alerts GraphQl
+# Magento 2 Product Alerts GraphQL (Support PWA)
 Mageplaza Product Alerts Extension supports getting and pushing data on the website with GraphQl.
 
 ## How to install
