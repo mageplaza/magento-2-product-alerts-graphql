@@ -1,5 +1,7 @@
 # Magento 2 Product Alerts GraphQL (Support PWA)
 
+**Magento 2 Product Alerts GraphQL is now a part of Mageplaza Product Alerts extension that adds GraphQL features.** This upgrade supports PWA compatibility. Now, with Mageplaza Product Alerts, you and get and push data on the website with GraphQl in a breeze.
+
 [Mageplaza Product Alerts for Magento 2](https://www.mageplaza.com/magento-2-product-alerts/) is a useful tool to inform customers about any changes in products, promotion programs, or simply a way to maintain the relationship with customers. 
 
 The first outstanding feature of this extension is the “Out of stock” notification. When a product is out of stock, customers will see a pop-up with a message to inform them that the product is no longer available. After that, customers interested in the product can immediately hit the “Notify me” button to get the notification via email when the product is back in stock.
@@ -9,9 +11,8 @@ Another pop-up will display for customers to subscribe if they want to get notif
 The notifications on restocked products or price changes can be sent to customers manually or automatically. Customers don’t have to track the update themselves on the store; instead, they can totally get all the accurate information via Product Alerts notifications. The extension supports all product types, including simple product, configurable product, group product, virtual product, bundle product, and downloadable product. 
 
 With the support of the Mageplaza Report for Magento 2, the store admin can view all the product requests from customers in a clear data report. The report includes the most and recent requests about back-in-stock products and price changes. These valuable statistics help you understand customers’ interests and behaviors so that it’ll be easier to know which products are the most potential. 
-The extension supports non-login customers to request price change and get notifications about the result. New visitors will have no burden to create an account for the first time they browse your website. Only a simple configuration from the admin backend will get everything done well. 
 
-What’s more, **Magento 2 Product Alerts GraphQL is now a part of Mageplaza Product Alerts extension that adds GraphQL features.** This upgrade supports PWA compatibility. Now, with Mageplaza Product Alerts, you and get and push data on the website with GraphQl in a breeze.
+The extension supports non-login customers to request price change and get notifications about the result. New visitors will have no burden to create an account for the first time they browse your website. Only a simple configuration from the admin backend will get everything done well. 
 
 ## 1. How to install
 Run the following command in Magento 2 root folder:
