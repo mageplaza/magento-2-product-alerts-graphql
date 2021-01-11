@@ -36,6 +36,8 @@ use Mageplaza\Core\Helper\AbstractData as CoreHelper;
  */
 class Data extends CoreHelper
 {
+    const CONFIG_MODULE_PATH = 'mpproductalerts';
+
     /**
      * @var SearchCriteriaBuilder
      */

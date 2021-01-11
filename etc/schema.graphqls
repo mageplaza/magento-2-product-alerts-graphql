@@ -38,6 +38,10 @@ type Mutation {
     ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Stock") @doc(description: "Guest add new Stock alert.")
 }
 
+type Query {
+    MpProductAlertsConfigs: ConfigOutput @resolver(class: "\\Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Configs") @doc(description: "Query to get config of Product Alerts.")
+}
+
 type MpProductAlertsCustomersOutput {
     out_of_stock (
         filter: MpProductAlertsSubscriberFilterInput @doc(description: "Identifies which MpProductAlertsSubscriberFilterInput attributes to search for and return.")
@@ -111,4 +115,34 @@ type PageInfo {
     hasPreviousPage: Boolean @doc(description: "Is previous page")
     startPage: Int @doc(description: "Start page")
     endPage: Int @doc(description: "End page")
+}
+
+type ConfigOutput {
+    general: GeneralOutput @doc(description: "General Configuration")
+    price_alert: PriceAlertOutput @doc(description: "Price Alert Configuration")
+    stock_alert: StockAlertOutput @doc(description: "Stock Alert Configuration")
+}
+
+type GeneralOutput {
+    custom_css: String @doc(description: "Custom CSS")
+}
+
+type PriceAlertOutput {
+    subscribed_text: String @doc(description: "Subscribed Text")
+    popup_setting: PopupSettingOutput @doc(description: "Popup Setting Configuration")
+}
+
+type StockAlertOutput {
+    show_listing_page: Boolean @doc(description: "Show Listing Page")
+    button_text: String @doc(description: "Button Text")
+    subscribed_text: String @doc(description: "Subscribed Text")
+    popup_setting: PopupSettingOutput @doc(description: "Popup Setting Configuration")
+}
+
+type PopupSettingOutput {
+    heading_text: String @doc(description: "Heading Text")
+    description: String @doc(description: "Description")
+    place_holder: String @doc(description: "Place Holder")
+    button_text: String @doc(description: "Button Text")
+    footer_content: String @doc(description: "Footer Content")
 }
