@@ -26,20 +26,24 @@ type Mutation {
     ): Boolean @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Delete") @doc(description: "Customer remove subscriber.")
     MpProductAlertCustomerNotifyPriceDrops(
         input: CustomerSubmitInput @doc(description: "Information of the customer is submit.")
-    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Price") @doc(description: "Customer add new Price alert.")
+    ): MpSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Price") @doc(description: "Customer add new Price alert.")
     MpProductAlertCustomerNotifyInStock(
         input: CustomerSubmitInput @doc(description: "Information of the customer is submit.")
-    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Stock") @doc(description: "Customer add new Stock alert.")
+    ): MpSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Customer\\Stock") @doc(description: "Customer add new Stock alert.")
     MpProductAlertNotifyPriceDrops(
         input: GuestSubmitInput @doc(description: "Information of the subscriber is submit.")
-    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Price") @doc(description: "Guest add new Price alert.")
+    ): MpSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Price") @doc(description: "Guest add new Price alert.")
     MpProductAlertNotifyInStock(
         input: GuestSubmitInput @doc(description: "Information of the subscriber is submit.")
-    ): MpMageplazaSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Stock") @doc(description: "Guest add new Stock alert.")
+    ): MpSubscriberOutput @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Guest\\Stock") @doc(description: "Guest add new Stock alert.")
 }
 
 type Query {
     MpProductAlertsConfigs: ConfigOutput @resolver(class: "\\Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\Configs") @doc(description: "Query to get config of Product Alerts.")
+}
+
+interface ProductInterface {
+    mp_product_alert: MpProductAlert @doc(description: "Mageplaza Product Alert get status product alert") @resolver(class: "Mageplaza\\ProductAlertsGraphQl\\Model\\Resolver\\GetStatusAlert")
 }
 
 type MpProductAlertsCustomersOutput {
@@ -68,6 +72,11 @@ input GuestSubmitInput {
     productSku: String! @doc(description: "The Sku assigned to the product.")
 }
 
+type MpProductAlert {
+    mp_productalerts_stock_notify: Boolean @doc(description: "Back in Stock Notification")
+    mp_productalerts_price_alert: Boolean @doc(description: " Price Alert")
+}
+
 input MpProductAlertsSubscriberFilterInput {
     subscriber_id: FilterTypeInput @doc(description: "Subscriber Id")
     customer_id: FilterTypeInput @doc(description: "Customer Id")
@@ -87,11 +96,11 @@ input MpProductAlertsSubscriberFilterInput {
 
 type MpProductAlertsSubscriber {
     total_count: Int @doc(description: "The total number of results returned when a query is applied"),
-    items: [MpMageplazaSubscriberOutput] @doc(description: "mp_product_alert data is satisfied"),
+    items: [MpSubscriberOutput] @doc(description: "mp_product_alert data is satisfied"),
     pageInfo: PageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query")
 }
 
-type MpMageplazaSubscriberOutput {
+type MpSubscriberOutput {
     subscriber_id: Int @doc(description: "Subscriber Id")
     customer_id: Int @doc(description: "Customer Id")
     customer_email: String @doc(description: "Customer Email")
@@ -106,6 +115,14 @@ type MpMageplazaSubscriberOutput {
     subscribe_updated_at: String @doc(description: "Subscribe Updated At")
     subscribe_created_at: String @doc(description: "Subscribe Created At")
     last_send_date: String @doc(description: "Last Send Date")
+    product_data: ProductDataOutput @doc(description: "Product Data")
+}
+
+type ProductDataOutput {
+    sku: String @doc(description: "SKU")
+    name: String @doc(description: "Name")
+    product_url: String @doc(description: "Product URL")
+    product_image_url: String @doc(description: "Product Image URL")
 }
 
 type PageInfo {
