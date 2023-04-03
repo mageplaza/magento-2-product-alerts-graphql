@@ -24,6 +24,7 @@ declare(strict_types=1);
 namespace Mageplaza\ProductAlertsGraphQl\Model\Resolver;
 
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
@@ -88,9 +89,18 @@ class Subscriber implements ResolverInterface
 
         $searchCriteria = $this->_helperData->validateAndAddFilter($args, 'subscribers');
         if ($this->_type === Type::STOCK_SUBSCRIPTION) {
-            $searchResult = $this->productAlertsRepository->getOutOfStockAlert($customer->getId(), $searchCriteria);
+            try {
+                $searchResult = $this->productAlertsRepository->getOutOfStockAlert($customer->getId(), $searchCriteria);
+            } catch (NoSuchEntityException $e) {
+                return [];
+            }
+
         } else {
-            $searchResult = $this->productAlertsRepository->getPriceAlert($customer->getId(), $searchCriteria);
+            try {
+                $searchResult = $this->productAlertsRepository->getPriceAlert($customer->getId(), $searchCriteria);
+            } catch (NoSuchEntityException $e) {
+                return [];
+            }
         }
         $items = $searchResult->getItems();
         $pageInfo = $this->_helperData->getPageInfo($searchResult, $searchCriteria, $args);
